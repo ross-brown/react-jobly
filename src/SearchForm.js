@@ -9,7 +9,9 @@ import React from "react";
  */
 
 function SearchForm() {
-
+  return (
+    <p>Search Form goes here....</p>
+  )
 }
 
 export default SearchForm;

@@ -63,16 +63,30 @@ class JoblyApi {
    * - string that
    */
 
-  static async getAllCompanies() {
-    let res = await this.request("companies");
+  static async getAllCompanies(searchTerm) {
+    let res;
+    if (searchTerm) {
+      res = await this.request("companies", { nameLike: searchTerm });
+    } else {
+      res = await this.request("companies");
+    }
+
     return res;
   }
 
-  /** Get list of all jobs. */
+  /** Get list of all jobs.
+   *
+   * Send query string if filtering term is passed in.
+   */
 
-  static async getAllJobs() {
-    let res = await this.request("jobs");
+  static async getAllJobs(searchTerm) {
+    let res;
+    if (searchTerm) {
+      res = await this.request("jobs", { title: searchTerm });
+    } else {
+      res = await this.request("jobs");
+    }
+
     return res;
   }
-
 }

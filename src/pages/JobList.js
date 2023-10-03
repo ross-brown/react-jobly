@@ -1,6 +1,6 @@
 import React from "react";
 
-import SearchForm from "./SearchForm";
+import SearchForm from "../SearchForm";
 
 /** Renders list of all jobs.
  *
@@ -18,7 +18,7 @@ function JobList() {
       <p>Insert Jobs Here</p>
     </>
 
-  )
+  );
 }
 
 export default JobList;

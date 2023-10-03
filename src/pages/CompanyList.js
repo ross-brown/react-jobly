@@ -1,6 +1,6 @@
 import React from "react";
 
-import SearchForm from "./SearchForm";
+import SearchForm from "../SearchForm";
 
 /** Renders list of companies with its details & search bar.
  *
@@ -18,7 +18,7 @@ function CompanyList() {
       <SearchForm />
       <p>Insert companies here</p>
     </>
-  )
+  );
 }
 
 export default CompanyList;

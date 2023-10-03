@@ -1,8 +1,8 @@
 import React from "react";
-import Homepage from "./Homepage";
-import CompanyList from "./CompanyList";
-import CompanyDetail from "./CompanyDetail";
-import JobList from "./JobList";
+import Homepage from "./pages/Homepage";
+import CompanyList from "./pages/CompanyList";
+import CompanyDetail from "./pages/CompanyDetail";
+import JobList from "./pages/JobList";
 import { Route, Routes } from "react-router-dom";
 
 /** Has list of routes for individual components here.
@@ -16,7 +16,7 @@ import { Route, Routes } from "react-router-dom";
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, Joblist }
  */
 
-function RoutesList ({ }) {
+function RoutesList({ }) {
 
   return (
     <div className="RoutesList">
@@ -27,7 +27,7 @@ function RoutesList ({ }) {
         <Route path="/jobs" element={<JobList />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default RoutesList;
