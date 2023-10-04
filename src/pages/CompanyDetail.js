@@ -5,8 +5,8 @@ import JobCardList from "../JobCardList";
 
 /** Renders details of a single company.
  *
- * Props:
- * - company: {will edit later...}
+ * State:
+ * - company: {handle, name, description, numEmployees, logoUrl}
  *
  * RoutesList -> CompanyDetail
  */
@@ -21,7 +21,7 @@ function CompanyDetail() {
       setCompany(data);
     }
     fetchCompany();
-  }, []);
+  }, [name]);
 
   if(!company) return <h1>Loading....</h1>
 

@@ -1,20 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
 /** Renders search form for both companies and jobs.
  *
  * Props:
- * - handleSubmit(): will edit later...
+ * - filter: parent function to call
  *
  * { CompanyList, JobList } -> SearchForm
  */
 
-function SearchForm() {
-  // return (
-    // <form onSubmit={}>
-    //   <input placeholder="Enter Search Term.." />
-    //   <button>Submit</button>
-    // </form>
-  // )
+function SearchForm({ filter }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  /** Updates search input value */
+  function handleChange(evt) {
+    setSearchTerm(evt.target.value);
+  }
+
+  /** call parent filter function with current search term value. */
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    filter(searchTerm);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        placeholder="Enter Search Term..."
+        onChange={handleChange}
+        value={searchTerm}
+      />
+      <button>Submit</button>
+    </form>
+  );
 }
 
 export default SearchForm;

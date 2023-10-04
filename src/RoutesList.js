@@ -8,16 +8,10 @@ import NotFound from "./pages/NotFound";
 
 /** Has list of routes for individual components here.
  *
- * Props:
- * - companies: {will edit later...}
- * - company: {will edit later...}
- * - jobs: {will edit later...}
- * - handleSubmit(): will edit later...
- *
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, Joblist }
  */
 
-function RoutesList({ }) {
+function RoutesList() {
 
   return (
     <div className="RoutesList">

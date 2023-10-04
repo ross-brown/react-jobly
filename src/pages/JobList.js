@@ -7,9 +7,8 @@ import JobCardList from "../JobCardList";
 
 /** Renders list of all jobs.
  *
- * Props:
- * - jobs: {will edit later...}
- * - handleSubmit(): will edit later...
+ * State:
+ * - jobs: [{ id, title, salary, equity }, ...]
  *
  * RoutesList -> JobList
  */
@@ -25,11 +24,19 @@ function JobList() {
     fetchJobs();
   }, []);
 
-  if(!jobs) return <h1>Loading....</h1>
+  /** filter: takes in a search term and
+   * returns a list of jobs that match that title */
+  async function filter(searchTerm) {
+    const data = await JoblyApi.getJobs(searchTerm);
+    setJobs(data);
+  }
+
+  if (!jobs) return <h1>Loading....</h1>;
 
   return (
     <>
-      <SearchForm />
+      <SearchForm filter={filter} />
+      {jobs.length === 0 && <p>Sorry, no results were found!</p>}
       <JobCardList jobs={jobs} />
     </>
 

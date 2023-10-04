@@ -11,10 +11,10 @@ function JobCard({ job }) {
   return (
     <div className="JobCard">
       <h4>{job.title}</h4>
-      <p>{job.salary || ""}</p>
-      <p>{job.equity}</p>
+      {job.salary ? <p>{`Salary: ${job.salary}`}</p> : ""}
+      {job.equity ? <p>{`Equity: ${job.equity}`}</p> : ""}
     </div>
-  )
+  );
 }
 
 export default JobCard;
