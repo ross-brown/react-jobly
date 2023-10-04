@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import userContext from "../userContext";
+import { Link } from "react-router-dom";
 
 /** Renders homepage.
  *
@@ -6,12 +8,19 @@ import React from "react";
 */
 
 function Homepage() {
+  const user = useContext(userContext);
 
   return (
-    <>
-    <h1>Jobly</h1>
-    <p>All the jobs in one, convenient place.</p>
-    </>
+    <div className="Homepage">
+      <h1>Jobly</h1>
+      <p>All the jobs in one, convenient place.</p>
+      {user
+        ? <p>Welcome Back, {user.username}!</p>
+        : <>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Signup</Link>
+          </>}
+    </div>
   )
 }
 
