@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import SearchForm from "../SearchForm";
 import CompanyCard from "../CompanyCard";
@@ -19,11 +20,11 @@ function CompanyList() {
   const [companies, setCompanies] = useState(null);
 
   useEffect(() => {
-    async function fetchCompanes() {
+    async function fetchCompanies() {
       const data = await JoblyApi.getCompanies("");
       setCompanies(data);
     }
-    fetchCompanes();
+    fetchCompanies();
   }, []);
 
   if(!companies) return <h1>Loading....</h1>
@@ -31,7 +32,10 @@ function CompanyList() {
   return (
     <>
       <SearchForm />
-      {companies.map(c => <CompanyCard key={c.handle} company={c} />)}
+      {companies.map(c => (
+      <Link to={`${c.handle}`}>
+        <CompanyCard key={c.handle} company={c} />
+      </Link>))}
     </>
   );
 }

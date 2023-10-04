@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "../api";
+import JobCardList from "../JobCardList";
 
 /** Renders details of a single company.
  *
@@ -22,8 +23,14 @@ function CompanyDetail() {
     fetchCompany();
   }, []);
 
+  if(!company) return <h1>Loading....</h1>
+
   return (
-    <p>company here</p>
+    <>
+      <h3>{ company.name }</h3>
+      <p>{ company.description }</p>
+      <JobCardList jobs={company.jobs}/>
+    </>
   );
 }
 
