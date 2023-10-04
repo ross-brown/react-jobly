@@ -8,14 +8,14 @@ import { Link } from "react-router-dom";
 */
 
 function Homepage() {
-  const { user } = useContext(userContext);
+  const { currentUser } = useContext(userContext);
 
   return (
     <div className="Homepage">
       <h1>Jobly</h1>
       <p>All the jobs in one, convenient place.</p>
-      {user
-        ? <p>Welcome Back, {user.username}!</p>
+      {currentUser
+        ? <p>Welcome Back, {currentUser.username}!</p>
         : <>
           <Link to="/login">Login</Link>
           <Link to="/signup">Signup</Link>

@@ -8,12 +8,12 @@ import userContext from "./userContext";
 */
 
 function Nav() {
-  const { user } = useContext(userContext);
+  const { currentUser } = useContext(userContext);
 
   return (
     <nav className="Nav nav">
       <NavLink to="/">Jobly</NavLink>
-      {user
+      {currentUser
         ? <div className="justify-content-end">
           <NavLink to="/companies">Companies</NavLink>
           <NavLink to="/jobs">Jobs</NavLink>

@@ -1,12 +1,12 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
 import { useEffect, useState } from 'react';
+import jwtDecode from 'jwt-decode';
 
 import Nav from './Nav';
 import RoutesList from './RoutesList';
 import userContext from './userContext';
 import JoblyApi from './api';
-import Alert from './Alert';
 
 /** Renders Jobly App components.
  *
@@ -15,15 +15,16 @@ import Alert from './Alert';
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [username, setUsername] = useState(null);
-  //FIXME: can we decode the token to grab username instead of setting a derived state?
+  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
-    async function fetchCurrentUser(username) {
-      let user = JoblyApi.getUser(username);
+    async function fetchCurrentUser() {
+      const { username } = jwtDecode(token);
+
+      const user = await JoblyApi.getUser(username);
       setCurrentUser(user);
     }
-    fetchCurrentUser();
+    if (token) fetchCurrentUser();
   }, [token]);
 
 
@@ -32,13 +33,13 @@ function App() {
 
     try {
       token = await JoblyApi.login(username, password);
-    } catch(err) {
-      return <Alert />;
+    } catch (err) {
+      setErrors(err);
     }
 
     setToken(token);
-    setUsername(username);
   }
+
 
   function logout() {
     setCurrentUser(null);
@@ -53,7 +54,7 @@ function App() {
       <BrowserRouter>
         <userContext.Provider value={{ currentUser }}>
           <Nav />
-          <RoutesList login={login} logout={logout} signup={signup} />
+          <RoutesList login={login} logout={logout} signup={signup} errors={errors} />
         </userContext.Provider>
       </BrowserRouter>
     </div>

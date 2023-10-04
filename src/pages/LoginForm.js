@@ -1,10 +1,13 @@
+import { useNavigate } from "react-router-dom";
+import Alert from "../Alert";
 import React, { useState } from "react";
 /** DocString... */
 
 
-function LoginForm({ login }) {
+function LoginForm({ login, errors }) {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
+  const navigate = useNavigate();
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -18,6 +21,7 @@ function LoginForm({ login }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     login(formData);
+    navigate("/");
   }
 
   return (
@@ -36,6 +40,7 @@ function LoginForm({ login }) {
         <div className="mb-3">
           <label htmlFor="password">Password</label>
           <input
+            type="password"
             id="password"
             value={formData.password}
             name="password"
@@ -45,6 +50,7 @@ function LoginForm({ login }) {
         </div>
         <button className="btn btn-primary">Submit</button>
       </form>
+      {errors && <Alert errors={errors} />}
     </div>
   );
 }

@@ -1,10 +1,13 @@
 import React from "react";
 
-function Alert() {
+function Alert({ errors }) {
+  console.log("errors:", errors);
 
   return (
     <div className="Alert">
-      <p>Please Enter Valid Credientials.</p>
+      {errors.map((err, i) => {
+        return <p key={i}>{err.message}</p>;
+      })}
     </div>
   );
 }
