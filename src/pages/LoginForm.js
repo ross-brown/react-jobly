@@ -2,7 +2,7 @@ import React, { useState } from "react";
 /** DocString... */
 
 
-function LoginForm() {
+function LoginForm({ login }) {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
 
@@ -17,7 +17,7 @@ function LoginForm() {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    // call some parent function to login
+    login(formData);
   }
 
   return (
