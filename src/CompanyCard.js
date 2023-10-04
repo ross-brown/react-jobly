@@ -10,7 +10,7 @@ import React from "react";
 */
 function CompanyCard({ company }) {
   return (
-    <div>
+    <div className="CompanyCard">
       {company.logoUrl &&
         <img src={company.logoUrl} alt={company.handle} width="75px" />}
       <h2>{company.name}</h2>

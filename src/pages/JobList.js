@@ -14,7 +14,7 @@ import JobCardList from "../JobCardList";
  */
 
 function JobList() {
-  const [jobs, setJobs] = useState();
+  const [jobs, setJobs] = useState(null);
 
   useEffect(() => {
     async function fetchJobs() {
@@ -34,11 +34,11 @@ function JobList() {
   if (!jobs) return <h1>Loading....</h1>;
 
   return (
-    <>
+    <div className="JobList">
       <SearchForm filter={filter} />
       {jobs.length === 0 && <p>Sorry, no results were found!</p>}
       <JobCardList jobs={jobs} />
-    </>
+    </div>
 
   );
 }

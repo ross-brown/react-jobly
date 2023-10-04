@@ -34,14 +34,14 @@ function CompanyList() {
   if (!companies) return <h1>Loading....</h1>;
 
   return (
-    <>
+    <div className="CompanyList">
       <SearchForm filter={filter} />
       {companies.length === 0 && <p>Sorry, no results were found!</p>}
       {companies.map(c => (
         <Link to={`${c.handle}`} key={c.handle}>
           <CompanyCard key={c.handle} company={c} />
         </Link>))}
-    </>
+    </div>
   );
 }
 
