@@ -18,23 +18,23 @@ import userContext from "./userContext";
  */
 
 function RoutesList() {
-  const user = useContext(userContext);
+  const { user } = useContext(userContext);
   return (
     <div className="RoutesList">
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="*" element={<NotFound />} />
-          {user
-            ? <>
-                <Route path="/companies" element={<CompanyList />} />
-                <Route path="/companies/:handle" element={<CompanyDetail />} />
-                <Route path="/jobs" element={<JobList />} />
-              </>
-            : <>
-                <Route path="/login" element={<LoginForm />} />
-                <Route path="/signup" element={<SignupForm />} />
-                <Route path="/profile" element={<Profile />} />
-              </>}
+        {user
+          ? <>
+            <Route path="/companies" element={<CompanyList />} />
+            <Route path="/companies/:handle" element={<CompanyDetail />} />
+            <Route path="/jobs" element={<JobList />} />
+          </>
+          : <>
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/signup" element={<SignupForm />} />
+            <Route path="/profile" element={<Profile />} />
+          </>}
       </Routes>
     </div>
   );

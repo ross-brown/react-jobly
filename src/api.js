@@ -50,7 +50,7 @@ class JoblyApi {
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
-    
+
     return res.company;
   }
 
@@ -79,6 +79,19 @@ class JoblyApi {
     let res = await this.request("jobs", data);
 
     return res.jobs;
+  }
+
+  /** login: takes in a username and password and returns a JWT */
+  static async login(username, password) {
+    let res = await this.request("auth/token", { username, password }, "POST");
+    return res.token;
+  }
+
+
+  /** register: takes in a user object and returns a JWT */
+  static async register(user) {
+    let res = await this.request("auth/register", user, "POST");
+    return res.token;
   }
 }
 

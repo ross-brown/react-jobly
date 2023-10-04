@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 */
 
 function Homepage() {
-  const user = useContext(userContext);
+  const { user } = useContext(userContext);
 
   return (
     <div className="Homepage">
@@ -17,11 +17,11 @@ function Homepage() {
       {user
         ? <p>Welcome Back, {user.username}!</p>
         : <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-          </>}
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link>
+        </>}
     </div>
-  )
+  );
 }
 
 export default Homepage;

@@ -8,22 +8,22 @@ import userContext from "./userContext";
 */
 
 function Nav() {
-  const user = useContext(userContext);
+  const { user } = useContext(userContext);
 
   return (
-    <nav>
+    <nav className="Nav nav">
       <NavLink to="/">Jobly</NavLink>
       {user
-        ? <>
-            <NavLink to="/companies">Companies</NavLink>
-            <NavLink to="/jobs">Jobs</NavLink>
-            <NavLink to="/profile">Profile</NavLink>
-        </>
-        : <>
-            <NavLink to="/login">Login</NavLink>
-            <NavLink to="/signup">Signup</NavLink>
-            {/* Logout Link here with username */}
-        </>}
+        ? <div className="justify-content-end">
+          <NavLink to="/companies">Companies</NavLink>
+          <NavLink to="/jobs">Jobs</NavLink>
+          <NavLink to="/profile">Profile</NavLink>
+        </div>
+        : <div className="justify-content-end">
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">Signup</NavLink>
+          {/* Logout Link here with username */}
+        </div>}
     </nav>
   );
 }

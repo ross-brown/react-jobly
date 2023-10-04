@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Nav from './Nav';
 import RoutesList from './RoutesList';
@@ -11,17 +11,31 @@ import userContext from './userContext';
  * App -> { Nav, RoutesList }
  */
 function App() {
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => { }, [token]);
+
 
   function login({ username, password }) {
     //TODO:
   }
 
+  function logout() {
+    setCurrentUser(null);
+  }
+
+  function signup() {
+
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Nav />
-        <RoutesList />
+        <userContext.Provider value={{ currentUser }}>
+          <Nav />
+          <RoutesList login={login} logout={logout} signup={signup} />
+        </userContext.Provider>
       </BrowserRouter>
     </div>
   );
