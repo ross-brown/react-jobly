@@ -1,12 +1,13 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
+import { useState } from 'react';
 
 import Nav from './Nav';
 import RoutesList from './RoutesList';
 
 /** Renders Jobly App components.
  *
- * States:
+ * State:
  * - Companies: {will edit later...}
  * - Company: {will edit later...}
  * - Jobs: {will edit later...}
@@ -16,6 +17,14 @@ import RoutesList from './RoutesList';
  */
 function App() {
   //TODO: all functionality will live here
+  const [companies, setCompanies] = useState();
+  const [company, setCompany] = useState();
+  const [jobs, setJobs] = useState();
+  const [isLoading, setIsLoading] = useState();
+
+
+  
+
   return (
     <div className="App">
       <BrowserRouter>

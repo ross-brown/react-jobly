@@ -1,5 +1,3 @@
-
-
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 /** API Class.
@@ -63,15 +61,14 @@ class JoblyApi {
    * - string that
    */
 
-  static async getAllCompanies(searchTerm) {
+  static async getCompanies(searchTerm) {
     let res;
     if (searchTerm) {
       res = await this.request("companies", { nameLike: searchTerm });
     } else {
       res = await this.request("companies");
     }
-
-    return res;
+    return res.companies;
   }
 
   /** Get list of all jobs.
@@ -79,14 +76,10 @@ class JoblyApi {
    * Send query string if filtering term is passed in.
    */
 
-  static async getAllJobs(searchTerm) {
-    let res;
-    if (searchTerm) {
-      res = await this.request("jobs", { title: searchTerm });
-    } else {
-      res = await this.request("jobs");
-    }
-
-    return res;
+  static async getJobs(searchTerm) {
+    let res = await this.request("jobs", { title: searchTerm });
+    return res.jobs;
   }
 }
+
+export default JoblyApi;

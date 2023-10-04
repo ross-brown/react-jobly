@@ -9,9 +9,12 @@ import React from "react";
  */
 
 function SearchForm() {
-  return (
-    <p>Search Form goes here....</p>
-  )
+  // return (
+    // <form onSubmit={}>
+    //   <input placeholder="Enter Search Term.." />
+    //   <button>Submit</button>
+    // </form>
+  // )
 }
 
 export default SearchForm;

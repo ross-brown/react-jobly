@@ -4,6 +4,7 @@ import CompanyList from "./pages/CompanyList";
 import CompanyDetail from "./pages/CompanyDetail";
 import JobList from "./pages/JobList";
 import { Route, Routes } from "react-router-dom";
+import NotFound from "./pages/NotFound";
 
 /** Has list of routes for individual components here.
  *
@@ -25,6 +26,7 @@ function RoutesList({ }) {
         <Route path="/companies" element={<CompanyList />} />
         <Route path="/companies/:name" element={<CompanyDetail />} />
         <Route path="/jobs" element={<JobList />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
