@@ -11,18 +11,18 @@ function Nav({ logout }) {
   const { currentUser } = useContext(userContext);
 
   return (
-    <nav className="Nav nav">
-      <NavLink to="/">Jobly</NavLink>
+    <nav className="Nav navbar">
+      <NavLink className="navbar-brand" to="/">Jobly</NavLink>
       {currentUser.data
-        ? <div className="justify-content-end">
-          <NavLink to="/companies">Companies</NavLink>
-          <NavLink to="/jobs">Jobs</NavLink>
-          <NavLink to="/profile">Profile</NavLink>
-          <NavLink to="/" onClick={logout}>{`Logout(${currentUser.data.username})`}</NavLink>
+        ? <div className="d-inline justify-content-end">
+          <NavLink className="mx-2" to="/companies">Companies</NavLink>
+          <NavLink className="mx-2" to="/jobs">Jobs</NavLink>
+          <NavLink className="mx-2" to="/profile">Profile</NavLink>
+          <NavLink className="mx-2" to="/" onClick={logout}>{`Logout(${currentUser.data.username})`}</NavLink>
         </div>
         : <div className="justify-content-end">
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">Signup</NavLink>
+          <NavLink className="mx-2" to="/login">Login</NavLink>
+          <NavLink className="mx-2" to="/signup">Signup</NavLink>
         </div>}
     </nav>
   );

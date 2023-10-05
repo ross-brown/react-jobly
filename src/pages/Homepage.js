@@ -17,8 +17,8 @@ function Homepage() {
       {currentUser.data
         ? <p>Welcome Back, {currentUser.data.username}!</p>
         : <>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
+          <Link className="btn btn-primary mx-1" to="/login">Login</Link>
+          <Link className="btn btn-primary mx-1" to="/signup">Signup</Link>
         </>}
     </div>
   );

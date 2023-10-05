@@ -10,13 +10,14 @@ function NotFound() {
 
   return (
     <div className="NotFound">
-      {currentUser
-      ? <>
-          <h1>This page doesn't exist.</h1>
+      {currentUser.data
+        ? <>
+          <h1>Sorry, this page isn't available.</h1>
+          <p>Either the page is broken, deleted, or doesn't exist.</p>
           <Link to="/">Go Home</Link>
         </>
-      : <>
-          <h1>You must be logged in to see this page.</h1>
+        : <>
+          <h1>Sorry, you must be logged in to see this page.</h1>
           <Link to="/">Go Home</Link>
         </>}
     </div>

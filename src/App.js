@@ -29,7 +29,12 @@ function App() {
       }
     }
 
-    if (token) fetchCurrentUser();
+    if (token) {
+      fetchCurrentUser();
+    } else {
+      setCurrentUser(c => ({ ...c, isLoaded: true }));
+    }
+
   }, [token]);
 
 
@@ -56,6 +61,9 @@ function App() {
     // setToken(token);
     localStorage.setItem("token", token);
   }
+
+  /** Protects whole app */
+  if (!currentUser.isLoaded) return <h1>Jobly Loading...</h1>;
 
   return (
     <div className="App">

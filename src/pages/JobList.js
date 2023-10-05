@@ -31,7 +31,7 @@ function JobList() {
     setJobs(data);
   }
 
-  if (!jobs) return <h1>Loading....</h1>;
+  if (!jobs) return <h1>Jobs Loading....</h1>;
 
   return (
     <div className="JobList">

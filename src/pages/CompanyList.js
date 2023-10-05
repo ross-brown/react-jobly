@@ -31,7 +31,7 @@ function CompanyList() {
     setCompanies(data);
   }
 
-  if (!companies) return <h1>Loading....</h1>;
+  if (!companies) return <h1>Companies Loading....</h1>;
 
   return (
     <div className="CompanyList">
