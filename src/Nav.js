@@ -4,6 +4,9 @@ import userContext from "./userContext";
 
 /** Renders Navbar.
  *
+ * Props:
+ * - logout: function to log user out (lives in App component).
+ *
  * App -> Nav
 */
 

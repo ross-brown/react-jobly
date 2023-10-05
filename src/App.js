@@ -10,13 +10,21 @@ import JoblyApi from './api';
 
 /** Renders Jobly App components.
  *
+ * State:
+ * - currentUser: has data for current user logged in, and isLoaded boolean to
+ *                check if current user has been properly fetched.
+ *                ex: { data: {username,...}, isLoaded: false }
+ * - token: state if we have valid token. "...."
+ *
  * App -> { Nav, RoutesList }
  */
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ data: null, isLoaded: false });
   const [token, setToken] = useState(localStorage.getItem("token"));
-
+  //TODO: update token to be in useEffect
+  // gives ability to change piece in one spot
+  // either useEffect below or create a new one
   useEffect(() => {
     async function fetchCurrentUser() {
       const { username } = jwtDecode(token);

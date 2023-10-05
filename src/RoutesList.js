@@ -14,6 +14,10 @@ import userContext from "./userContext";
 
 /** Has list of routes for individual components here.
  *
+ * Props:
+ * - login: fetches token from backend with username/password (from App component)
+ * - signup: fetches token from backend with form data (from App component)
+ *
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, Joblist }
  */
 
