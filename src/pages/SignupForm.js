@@ -3,7 +3,19 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../Alert";
 
-function SignupForm({ signup, errors }) {
+
+/** SignupForm: form for user to fill out and register
+ *
+ * Props:
+ * - signup: funciton to call in parent
+ *
+ * State:
+ * - formData: {username, password, firstName, lastName, email}
+ * - formErrors: [msg, msg, ....]
+ *
+ * RoutesList -> SignupForm -> Alert (if formErrors)
+ */
+function SignupForm({ signup }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -15,6 +27,7 @@ function SignupForm({ signup, errors }) {
 
   const navigate = useNavigate();
 
+  /** Update formData inputs */
   function handleChange(evt) {
     const { name, value } = evt.target;
 
@@ -24,6 +37,10 @@ function SignupForm({ signup, errors }) {
     }));
   }
 
+  /** handleSubmit: call parent function to signup and navigate to homepage
+   *
+   * If error, set formErrors state with list of error messages
+   */
   async function handleSubmit(evt) {
     evt.preventDefault();
 
@@ -31,7 +48,7 @@ function SignupForm({ signup, errors }) {
       await signup(formData);
       navigate("/");
     } catch (err) {
-      let errors = err.map(e => e.message);
+      let errors = err[0].message;
       setFormErrors(errors);
     }
   }
@@ -52,7 +69,7 @@ function SignupForm({ signup, errors }) {
         <div className="mb-3">
           <label htmlFor="password">Password</label>
           <input
-          type="password"
+            type="password"
             id="password"
             value={formData.password}
             name="password"

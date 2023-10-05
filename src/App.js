@@ -28,21 +28,24 @@ function App() {
   }, [token]);
 
 
+  /** login: fetch token from backend with username/password,
+   *  set the token in state */
   async function login({ username, password }) {
     const token = await JoblyApi.login(username, password);
-
     setToken(token);
   }
 
-
+  /** logout: set the current user and token in state to null. */
   function logout() {
     setCurrentUser(null);
     setToken(null);
   }
 
+  /** signup: fetch token from backend with signin form data
+   * set the token in state
+   */
   async function signup(userData) {
-     const token = await JoblyApi.register(userData);
-
+    const token = await JoblyApi.register(userData);
     setToken(token);
   }
 
