@@ -19,6 +19,7 @@ import userContext from "./userContext";
 
 function RoutesList({ login, signup }) {
   const { currentUser } = useContext(userContext);
+
   return (
     <div className="RoutesList">
       <Routes>
@@ -29,11 +30,11 @@ function RoutesList({ login, signup }) {
             <Route path="/companies" element={<CompanyList />} />
             <Route path="/companies/:handle" element={<CompanyDetail />} />
             <Route path="/jobs" element={<JobList />} />
+            <Route path="/profile" element={<Profile />} />
           </>
           : <>
             <Route path="/login" element={<LoginForm login={login} />} />
             <Route path="/signup" element={<SignupForm signup={signup} />} />
-            <Route path="/profile" element={<Profile />} />
           </>}
       </Routes>
     </div>

@@ -9,14 +9,16 @@ import React from "react";
  * {LoginForm, SignupForm} -> Alert
  */
 function Alert({ errors }) {
-  console.log("errors in alert", errors);
+
   return (
     <div className="Alert">
-      {errors.map((err, i) => {
-        return (
-          <p key={i}>{err}</p>
-        );
-      })}
+     { Array.isArray(errors)
+      ? errors.map((err, i) => {
+          return (
+            <p key={i}>{err}</p>
+          );
+        })
+      : <p>{errors}</p>}
     </div>
   );
 }

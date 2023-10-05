@@ -42,9 +42,8 @@ function LoginForm({ login }) {
       await login(formData);
       navigate("/");
     } catch (err) {
-      //FIXME: sometiems err[0].message is a stirng, and sometimes its an array...
       let errors = err[0].message;
-      setFormErrors([errors]);
+      setFormErrors(errors);
     }
   }
 
@@ -54,6 +53,7 @@ function LoginForm({ login }) {
         <div className="mb-3">
           <label htmlFor="username">Username</label>
           <input
+            required
             id="username"
             value={formData.username}
             name="username"
@@ -64,6 +64,7 @@ function LoginForm({ login }) {
         <div className="mb-3">
           <label htmlFor="password">Password</label>
           <input
+            required
             type="password"
             id="password"
             value={formData.password}

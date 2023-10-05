@@ -89,7 +89,6 @@ class JoblyApi {
     let res = await this.request("auth/token", { username, password }, "POST");
     this.token = res.token;
 
-    console.log("username in api class", username)
     return this.token;
   }
 

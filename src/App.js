@@ -12,7 +12,12 @@ import JoblyApi from './api';
  *
  * App -> { Nav, RoutesList }
  */
-
+//TODO: catch errors here to protect app from crashing
+// - try/catch => console.error for now
+// - have isLoaded state to check if user is being fetched right now
+// instead of null, have empty object with currentUser + isLoaded for the user state
+// => { currUser: {...}, isLoaded: false }
+// allows better user interaction => show loading spinner while userdata is being fetched
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);

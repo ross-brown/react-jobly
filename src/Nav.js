@@ -18,7 +18,7 @@ function Nav({ logout }) {
           <NavLink to="/companies">Companies</NavLink>
           <NavLink to="/jobs">Jobs</NavLink>
           <NavLink to="/profile">Profile</NavLink>
-          <NavLink to="/" onClick={logout}>{`Logout ${currentUser.username}`}</NavLink>
+          <NavLink to="/" onClick={logout}>{`Logout(${currentUser.username})`}</NavLink>
         </div>
         : <div className="justify-content-end">
           <NavLink to="/login">Login</NavLink>

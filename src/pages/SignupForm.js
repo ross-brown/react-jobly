@@ -59,6 +59,7 @@ function SignupForm({ signup }) {
         <div className="mb-3">
           <label htmlFor="username">Username</label>
           <input
+            required
             id="username"
             value={formData.username}
             name="username"
@@ -69,6 +70,7 @@ function SignupForm({ signup }) {
         <div className="mb-3">
           <label htmlFor="password">Password</label>
           <input
+            required
             type="password"
             id="password"
             value={formData.password}
@@ -80,6 +82,7 @@ function SignupForm({ signup }) {
         <div className="mb-3">
           <label htmlFor="first-name">First Name</label>
           <input
+            required
             id="first-name"
             value={formData.firstName}
             name="firstName"
@@ -90,6 +93,7 @@ function SignupForm({ signup }) {
         <div className="mb-3">
           <label htmlFor="last-name">Last Name</label>
           <input
+            required
             id="last-name"
             value={formData.lastName}
             name="lastName"
@@ -100,6 +104,7 @@ function SignupForm({ signup }) {
         <div className="mb-3">
           <label htmlFor="email">Email</label>
           <input
+            required
             id="email"
             value={formData.email}
             name="email"
@@ -109,7 +114,7 @@ function SignupForm({ signup }) {
         </div>
         <button className="btn btn-primary">Submit</button>
       </form>
-      {formErrors && <Alert errors={formErrors} />}
+      {formErrors.length && <Alert errors={formErrors} />}
     </div>
   );
 }

@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Link } from "react-router-dom";
+import userContext from '../userContext';
 
 
 /** Custom 404 Page component */
 function NotFound() {
-  //TODO: create if conditional on if someone is logged in or not
-  // - That will dictate who sees what error message.
+  const { currentUser } = useContext(userContext);
+
   return (
-    <div>
-      <h1>This page doesn't exist.....</h1>
-      <Link to="/">Go Home</Link>
+    <div className="NotFound">
+      {currentUser
+      ? <>
+          <h1>This page doesn't exist.</h1>
+          <Link to="/">Go Home</Link>
+        </>
+      : <>
+          <h1>You must be logged in to see this page.</h1>
+          <Link to="/">Go Home</Link>
+        </>}
     </div>
   );
 }
