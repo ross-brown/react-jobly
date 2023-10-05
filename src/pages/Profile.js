@@ -2,14 +2,14 @@ import React from "react";
 
 import ProfileForm from "./ProfileForm";
 
-function Profile() {
-  //TODO: Haven't gotten to this step yet
+function Profile({ editProfile }) {
+
   return (
     <div className="Profile">
-      <p>Profile page</p>
-      <ProfileForm />
+      <h1>Profile</h1>
+      <ProfileForm editProfile={editProfile} />
     </div>
-  )
+  );
 }
 
 export default Profile;

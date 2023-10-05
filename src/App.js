@@ -16,15 +16,23 @@ import JoblyApi from './api';
  *                ex: { data: {username,...}, isLoaded: false }
  * - token: state if we have valid token. "...."
  *
+ * Effects:
+ * - if token, fetch the current user from the DB and set the state of the user
+ * - if token, set token in Local Storage, else, remove from localStorage
+ *
+ * Functions:
+ * - signup
+ * - login
+ * - logout
+ * - editProfile
+ *
  * App -> { Nav, RoutesList }
  */
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ data: null, isLoaded: false });
   const [token, setToken] = useState(localStorage.getItem("token"));
-  //TODO: update token to be in useEffect
-  // gives ability to change piece in one spot
-  // either useEffect below or create a new one
+
   useEffect(() => {
     async function fetchCurrentUser() {
       const { username } = jwtDecode(token);
@@ -37,12 +45,15 @@ function App() {
       }
     }
 
-    if (token) {
-      fetchCurrentUser();
-    } else {
-      setCurrentUser(c => ({ ...c, isLoaded: true }));
-    }
+    token
+      ? fetchCurrentUser()
+      : setCurrentUser(c => ({ ...c, isLoaded: true }));
+  }, [token]);
 
+  useEffect(() => {
+    token
+      ? localStorage.setItem("token", token)
+      : localStorage.removeItem("token");
   }, [token]);
 
 
@@ -50,14 +61,12 @@ function App() {
    *  set the token in state */
   async function login(userCreds) {
     const token = await JoblyApi.login(userCreds);
-    localStorage.setItem("token", token);
-    setToken(localStorage.getItem("token"));
+    setToken(token);
   }
 
   /** logout: set the current user and token in state to null. */
   function logout() {
     setCurrentUser({ data: null, isLoaded: false });
-    localStorage.removeItem("token");
     setToken(null);
   }
 
@@ -66,8 +75,14 @@ function App() {
    */
   async function signup(userData) {
     const token = await JoblyApi.register(userData);
-    // setToken(token);
-    localStorage.setItem("token", token);
+    setToken(token);
+  }
+
+  /** editProfile: takes in edit form data and set current user with new data */
+  async function editProfile({ username, firstName, lastName, email }) {
+    const formData = { firstName, lastName, email };
+    const user = await JoblyApi.editUser(username, formData);
+    setCurrentUser(u => ({ ...u, data: user }));
   }
 
   /** Protects whole app */
@@ -78,7 +93,10 @@ function App() {
       <BrowserRouter>
         <userContext.Provider value={{ currentUser }}>
           <Nav logout={logout} />
-          <RoutesList login={login} logout={logout} signup={signup} />
+          <RoutesList
+            login={login}
+            signup={signup}
+            editProfile={editProfile} />
         </userContext.Provider>
       </BrowserRouter>
     </div>

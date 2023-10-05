@@ -3,17 +3,18 @@ import React, { useState, useContext } from "react";
 import Alert from "../Alert";
 import userContext from "../userContext";
 
-function ProfileForm() {
-  const user = useContext(userContext);
+function ProfileForm({ editProfile }) {
+  const { currentUser } = useContext(userContext);
+  const { username, firstName, lastName, email } = currentUser.data;
 
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: ""
+    username,
+    firstName,
+    lastName,
+    email
   });
 
+  console.log("formData in Edit form",formData);
   const [formErrors, setFormErrors] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
 
@@ -35,7 +36,7 @@ function ProfileForm() {
     evt.preventDefault();
 
     try {
-      // parent function to edit
+      await editProfile(formData);
       setIsSaved(true);
     } catch (err) {
       let errors = err[0].message;
@@ -45,11 +46,11 @@ function ProfileForm() {
 
   return (
     <div className="SignupForm m-5">
-      <form onSubmit={handleSubmit} className="form-control">
+      <form onSubmit={handleSubmit} className="form-control mb-4">
         <div className="mb-3">
           <label htmlFor="username">Username</label>
           <input
-            disabled="true"
+            disabled={true}
             required
             id="username"
             value={formData.username}
@@ -93,8 +94,8 @@ function ProfileForm() {
         </div>
         <button className="btn btn-primary">Submit</button>
       </form>
-      {isSaved && <p>Changes Saved.</p>}
-      {formErrors.length !== 0 && <Alert errors={formErrors} />}
+      {isSaved && <Alert type={"success"} errors={"Changes saved."} />}
+      {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"} />}
     </div>
   );
 }

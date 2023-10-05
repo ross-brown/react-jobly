@@ -8,10 +8,10 @@ import React from "react";
  *
  * {LoginForm, SignupForm} -> Alert
  */
-function Alert({ errors }) {
-
+function Alert({ errors, type }) {
+  console.log("errors prop in Alert", errors);
   return (
-    <div className="Alert">
+    <div className={`alert alert-${type} pb-0`}>
      { Array.isArray(errors)
       ? errors.map((err, i) => {
           return (

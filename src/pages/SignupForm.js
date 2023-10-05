@@ -54,7 +54,7 @@ function SignupForm({ signup }) {
 
   return (
     <div className="SignupForm m-5">
-      <form onSubmit={handleSubmit} className="form-control">
+      <form onSubmit={handleSubmit} className="form-control mb-4">
         <div className="mb-3">
           <label htmlFor="username">Username</label>
           <input
@@ -113,7 +113,7 @@ function SignupForm({ signup }) {
         </div>
         <button className="btn btn-primary">Submit</button>
       </form>
-      {formErrors.length !== 0 && <Alert errors={formErrors} />}
+      {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"}/>}
     </div>
   );
 }

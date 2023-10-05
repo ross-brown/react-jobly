@@ -107,6 +107,12 @@ class JoblyApi {
 
     return res.user;
   }
+
+  static async editUser(username, editFormData) {
+    let res = await this.request(`users/${username}`, editFormData, "PATCH");
+
+    return res.user;
+  }
 }
 
 export default JoblyApi;
