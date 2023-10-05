@@ -3,7 +3,6 @@ import Alert from "../Alert";
 import React, { useState } from "react";
 
 
-
 /** LoginForm: form for a user to authenticate themselves and login
  *
  * Props:

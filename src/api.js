@@ -12,7 +12,7 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token;
+  static token = localStorage.getItem("token")
 
     // demo token:
     // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
@@ -85,8 +85,8 @@ class JoblyApi {
   }
 
   /** login: takes in a username and password and returns a JWT */
-  static async login(username, password) {
-    let res = await this.request("auth/token", { username, password }, "POST");
+  static async login(userCreds) {
+    let res = await this.request("auth/token", userCreds, "POST");
     this.token = res.token;
 
     return this.token;

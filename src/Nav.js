@@ -13,12 +13,12 @@ function Nav({ logout }) {
   return (
     <nav className="Nav nav">
       <NavLink to="/">Jobly</NavLink>
-      {currentUser
+      {currentUser.data
         ? <div className="justify-content-end">
           <NavLink to="/companies">Companies</NavLink>
           <NavLink to="/jobs">Jobs</NavLink>
           <NavLink to="/profile">Profile</NavLink>
-          <NavLink to="/" onClick={logout}>{`Logout(${currentUser.username})`}</NavLink>
+          <NavLink to="/" onClick={logout}>{`Logout(${currentUser.data.username})`}</NavLink>
         </div>
         : <div className="justify-content-end">
           <NavLink to="/login">Login</NavLink>

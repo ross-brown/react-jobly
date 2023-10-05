@@ -12,37 +12,39 @@ import JoblyApi from './api';
  *
  * App -> { Nav, RoutesList }
  */
-//TODO: catch errors here to protect app from crashing
-// - try/catch => console.error for now
-// - have isLoaded state to check if user is being fetched right now
-// instead of null, have empty object with currentUser + isLoaded for the user state
-// => { currUser: {...}, isLoaded: false }
-// allows better user interaction => show loading spinner while userdata is being fetched
+
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [currentUser, setCurrentUser] = useState({ data: null, isLoaded: false });
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
     async function fetchCurrentUser() {
       const { username } = jwtDecode(token);
 
-      const user = await JoblyApi.getUser(username);
-      setCurrentUser(user);
+      try {
+        const user = await JoblyApi.getUser(username);
+        setCurrentUser({ data: user, isLoaded: true });
+      } catch (error) {
+        console.error(error);
+      }
     }
+
     if (token) fetchCurrentUser();
   }, [token]);
 
 
   /** login: fetch token from backend with username/password,
    *  set the token in state */
-  async function login({ username, password }) {
-    const token = await JoblyApi.login(username, password);
-    setToken(token);
+  async function login(userCreds) {
+    const token = await JoblyApi.login(userCreds);
+    localStorage.setItem("token", token);
+    setToken(localStorage.getItem("token"));
   }
 
   /** logout: set the current user and token in state to null. */
   function logout() {
-    setCurrentUser(null);
+    setCurrentUser({ data: null, isLoaded: false });
+    localStorage.removeItem("token");
     setToken(null);
   }
 
@@ -51,7 +53,8 @@ function App() {
    */
   async function signup(userData) {
     const token = await JoblyApi.register(userData);
-    setToken(token);
+    // setToken(token);
+    localStorage.setItem("token", token);
   }
 
   return (

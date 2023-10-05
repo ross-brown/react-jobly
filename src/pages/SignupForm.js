@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../Alert";
 
-
 /** SignupForm: form for user to fill out and register
  *
  * Props:
@@ -114,7 +113,7 @@ function SignupForm({ signup }) {
         </div>
         <button className="btn btn-primary">Submit</button>
       </form>
-      {formErrors.length && <Alert errors={formErrors} />}
+      {formErrors.length !== 0 && <Alert errors={formErrors} />}
     </div>
   );
 }

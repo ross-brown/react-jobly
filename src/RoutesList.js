@@ -25,7 +25,7 @@ function RoutesList({ login, signup }) {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="*" element={<NotFound />} />
-        {currentUser
+        {currentUser.isLoaded
           ? <>
             <Route path="/companies" element={<CompanyList />} />
             <Route path="/companies/:handle" element={<CompanyDetail />} />
