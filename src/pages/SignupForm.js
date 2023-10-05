@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-function SignupForm() {
+import { useNavigate } from "react-router-dom";
+import Alert from "../Alert";
+
+function SignupForm({ signup, errors }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -8,6 +11,9 @@ function SignupForm() {
     lastName: "",
     email: ""
   });
+  const [formErrors, setFormErrors] = useState([]);
+
+  const navigate = useNavigate();
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -18,9 +24,16 @@ function SignupForm() {
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    // call some parent function to login
+
+    try {
+      await signup(formData);
+      navigate("/");
+    } catch (err) {
+      let errors = err.map(e => e.message);
+      setFormErrors(errors);
+    }
   }
 
   return (
@@ -39,6 +52,7 @@ function SignupForm() {
         <div className="mb-3">
           <label htmlFor="password">Password</label>
           <input
+          type="password"
             id="password"
             value={formData.password}
             name="password"
@@ -78,6 +92,7 @@ function SignupForm() {
         </div>
         <button className="btn btn-primary">Submit</button>
       </form>
+      {formErrors && <Alert errors={formErrors} />}
     </div>
   );
 }

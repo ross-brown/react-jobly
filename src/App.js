@@ -12,10 +12,10 @@ import JoblyApi from './api';
  *
  * App -> { Nav, RoutesList }
  */
+
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
     async function fetchCurrentUser() {
@@ -29,13 +29,7 @@ function App() {
 
 
   async function login({ username, password }) {
-    let token;
-
-    try {
-      token = await JoblyApi.login(username, password);
-    } catch (err) {
-      setErrors(err);
-    }
+    const token = await JoblyApi.login(username, password);
 
     setToken(token);
   }
@@ -43,18 +37,21 @@ function App() {
 
   function logout() {
     setCurrentUser(null);
+    setToken(null);
   }
 
-  function signup() {
+  async function signup(userData) {
+     const token = await JoblyApi.register(userData);
 
+    setToken(token);
   }
 
   return (
     <div className="App">
       <BrowserRouter>
         <userContext.Provider value={{ currentUser }}>
-          <Nav />
-          <RoutesList login={login} logout={logout} signup={signup} errors={errors} />
+          <Nav logout={logout} />
+          <RoutesList login={login} logout={logout} signup={signup} />
         </userContext.Provider>
       </BrowserRouter>
     </div>

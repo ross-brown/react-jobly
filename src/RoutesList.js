@@ -17,7 +17,7 @@ import userContext from "./userContext";
  * App -> RoutesList -> { Homepage, CompanyList, CompanyDetail, Joblist }
  */
 
-function RoutesList({ login, errors }) {
+function RoutesList({ login, signup }) {
   const { currentUser } = useContext(userContext);
   return (
     <div className="RoutesList">
@@ -31,8 +31,8 @@ function RoutesList({ login, errors }) {
             <Route path="/jobs" element={<JobList />} />
           </>
           : <>
-            <Route path="/login" element={<LoginForm login={login} errors={errors}/>} />
-            <Route path="/signup" element={<SignupForm />} />
+            <Route path="/login" element={<LoginForm login={login} />} />
+            <Route path="/signup" element={<SignupForm signup={signup} />} />
             <Route path="/profile" element={<Profile />} />
           </>}
       </Routes>

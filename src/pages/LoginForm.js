@@ -6,6 +6,7 @@ import React, { useState } from "react";
 
 function LoginForm({ login, errors }) {
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formErrors, setFormErrors] = useState([]);
 
   const navigate = useNavigate();
 
@@ -18,10 +19,17 @@ function LoginForm({ login, errors }) {
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    login(formData);
-    navigate("/");
+
+    try {
+      await login(formData);
+      navigate("/");
+    } catch (err) {
+      console.log("did this run?", err[0].message)
+      let errors = err.map(e => e.message);
+      setFormErrors(errors);
+    }
   }
 
   return (
@@ -50,7 +58,7 @@ function LoginForm({ login, errors }) {
         </div>
         <button className="btn btn-primary">Submit</button>
       </form>
-      {errors && <Alert errors={errors} />}
+      {formErrors.length !== 0 && <Alert errors={formErrors} />}
     </div>
   );
 }

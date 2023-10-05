@@ -7,7 +7,7 @@ import userContext from "./userContext";
  * App -> Nav
 */
 
-function Nav() {
+function Nav({ logout }) {
   const { currentUser } = useContext(userContext);
 
   return (
@@ -18,11 +18,11 @@ function Nav() {
           <NavLink to="/companies">Companies</NavLink>
           <NavLink to="/jobs">Jobs</NavLink>
           <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/" onClick={logout}>{`Logout ${currentUser.username}`}</NavLink>
         </div>
         : <div className="justify-content-end">
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/signup">Signup</NavLink>
-          {/* Logout Link here with username */}
         </div>}
     </nav>
   );
