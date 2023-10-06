@@ -126,11 +126,18 @@ class JoblyApi {
     return res.user;
   }
 
-  /** Applies to a job given a username and job ID. Returns the Job ID */
+  /** Applies to a job given a username/job ID. Returns the Job ID */
   static async applyToJob(username, jobId) {
     let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "POST");
 
     return res.applied;
+  }
+
+  /** Unapplies to a job given a username/job ID. Returns the Job ID that was unapplied. */
+  static async unapplyToJob(username, jobId) {
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "DELETE");
+
+    return res.unapplied;
   }
 }
 

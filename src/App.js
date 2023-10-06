@@ -33,6 +33,7 @@ import JoblyApi from './api';
 function App() {
   const [currentUser, setCurrentUser] = useState({ data: null, isLoaded: false });
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const [appIds, setAppIds] = useState(new Set());
 
   // console.log(currentUser.data);
   useEffect(() => {
@@ -89,11 +90,13 @@ function App() {
 
   async function apply(username, jobId) {
     const id = await JoblyApi.applyToJob(username, jobId);
-    setCurrentUser(c => ({
-      data: { ...c.data, applications: [...c.data.applications, id] },
-      isLoaded: true
-    }));
+    setAppIds(ids => new Set([...ids, id]))
   }
+
+  // async function unapply(username, jobId) {
+  //   const id = await JoblyApi.unapplyToJob(username, jobId);
+  //   setCurrentUser()
+  // }
 
   /** Protects whole app */
   if (!currentUser.isLoaded) return <h1>Jobly Loading...</h1>;
@@ -101,7 +104,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <userContext.Provider value={{ currentUser }}>
+        <userContext.Provider value={{ currentUser, appIds }}>
           <Nav logout={logout} />
           <RoutesList
             login={login}
