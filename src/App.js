@@ -85,6 +85,10 @@ function App() {
     setCurrentUser(u => ({ ...u, data: user }));
   }
 
+  async function applyToJob(jobId) {
+
+  }
+
   /** Protects whole app */
   if (!currentUser.isLoaded) return <h1>Jobly Loading...</h1>;
 
