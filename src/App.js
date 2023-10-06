@@ -33,10 +33,11 @@ import JoblyApi from './api';
 function App() {
   const [currentUser, setCurrentUser] = useState({ data: null, isLoaded: false });
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [appIds, setAppIds] = useState(new Set());
-  console.log("appIds", appIds);
+  const [appIds, setAppIds] = useState(new Set([]));
+  console.log("appIds in App", appIds);
+  // console.log("currentUser apps", currentUser.data.applications);
 
-  // console.log(currentUser.data);
+  console.log("currentUser data in APp", currentUser.data);
   useEffect(() => {
     async function fetchCurrentUser() {
       const { username } = jwtDecode(token);
@@ -44,14 +45,13 @@ function App() {
       try {
         const user = await JoblyApi.getUser(username);
         setCurrentUser({ data: user, isLoaded: true });
+        setAppIds(new Set([...user.applications]));
       } catch (error) {
         console.error(error);
       }
     }
 
-    token
-      ? fetchCurrentUser()
-      : setCurrentUser(c => ({ ...c, isLoaded: true }));
+    token ? fetchCurrentUser() : setCurrentUser(c => ({ ...c, isLoaded: true }));
 
   }, [token]);
 
@@ -92,13 +92,21 @@ function App() {
 
   /** adds username and job id to application database and sets job id to state id. */
   async function apply(username, jobId) {
+    console.log("apply username =", username, "jobId=", jobId);
     const id = await JoblyApi.applyToJob(username, jobId);
     setAppIds(ids => new Set([...ids, id]));
   }
 
   async function unapply(username, jobId) {
-    const id = await JoblyApi.unapplyToJob(username, jobId);
-    setAppIds(new Set(currentUser.data.applications.filter(id => id !== jobId)));
+    console.log("unapply username =", username, "jobId=", jobId);
+
+    await JoblyApi.unapplyToJob(username, jobId);
+
+    setAppIds(a => new Set([...a].filter(id => id !== jobId)));
+  }
+
+  function hasAppliedToJob(id) {
+    return appIds.has(id);
   }
 
   /** Protects whole app */
@@ -107,7 +115,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <userContext.Provider value={{ currentUser, appIds, apply, unapply, appIds }}>
+        <userContext.Provider value={{ currentUser, hasAppliedToJob, apply, unapply }}>
           <Nav logout={logout} />
           <RoutesList
             login={login}

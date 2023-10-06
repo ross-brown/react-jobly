@@ -12,19 +12,21 @@ import userContext from "./userContext";
  */
 
 function JobCard({ job }) {
-  const { currentUser, apply, unapply } = useContext(userContext);
+  const { currentUser, apply, unapply, hasAppliedToJob } = useContext(userContext);
   const [hasApplied, setHasApplied] = useState(false);
 
   useEffect(() => {
-    if (currentUser.data.applications.includes(job.id)) setHasApplied(true);
-  }, [currentUser.data.applications, job.id]);
+    if (hasAppliedToJob(job.id)) {
+      setHasApplied(true);
+    }
+  }, [job.id]);
 
   /** Handles on click for applying to jobs.
    *  Calls on parent function and sets hasApplied state to true.
    */
 
   async function handleApply(evt) {
-    const jobId = evt.target.value;
+    const jobId = +evt.target.value;
 
     try {
       await apply(currentUser.data.username, jobId);
@@ -39,7 +41,7 @@ function JobCard({ job }) {
    */
 
   async function handleUnapply(evt) {
-    const jobId = evt.target.value;
+    const jobId = +evt.target.value;
 
     try {
       await unapply(currentUser.data.username, jobId);
@@ -55,21 +57,12 @@ function JobCard({ job }) {
       <h5>{job.companyName}</h5>
       {job.salary ? <p>{`Salary: ${job.salary}`}</p> : ""}
       {job.equity ? <p>{`Equity: ${job.equity}`}</p> : ""}
-      {hasApplied
-        ? <button
-          value={job.id}
-          className="btn btn-danger"
-          onClick={handleUnapply}>
-          Applied
-        </button>
-        :
-        <button
-          value={job.id}
-          className="btn btn-danger"
-          onClick={handleApply}>
-          Apply
-        </button>
-      }
+      <button
+        value={job.id}
+        className={`btn btn-${hasApplied ? "" : "outline-"}danger w-25`}
+        onClick={hasApplied ? handleUnapply : handleApply}>
+        {hasApplied ? "Applied" : "Apply"}
+      </button>
     </div >
   );
 }

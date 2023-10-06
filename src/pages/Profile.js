@@ -8,17 +8,16 @@ import JobCardList from "../JobCardList";
 
 function Profile({ editProfile }) {
   const [jobs, setJobs] = useState(null);
-  const { currentUser, appIds } = useContext(userContext);
+  const { hasAppliedToJob } = useContext(userContext);
 
   useEffect(() => {
-
     async function fetchJobs() {
       const data = await JoblyApi.getJobs("");
-      const applications = data.filter(j => appIds.has(j.id));
+      const applications = data.filter(j => hasAppliedToJob(j.id));
       setJobs(applications);
     }
     fetchJobs();
-  }, []);
+  }, [hasAppliedToJob]);
 
   if (!jobs) return <h1>Profile Loading....</h1>;
 
@@ -28,6 +27,7 @@ function Profile({ editProfile }) {
       <ProfileForm editProfile={editProfile} />
 
       <div className="row row-cols-1">
+        <h3>Jobs Applied:</h3>
         {jobs.length === 0 && <p>Sorry, no job applications found.</p>}
         <JobCardList jobs={jobs} />
       </div>
