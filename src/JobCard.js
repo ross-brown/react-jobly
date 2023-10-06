@@ -1,4 +1,5 @@
 import React from "react";
+import "./JobCard.css"
 
 /** JobCard: simple presentation component for a job
  *
@@ -9,7 +10,7 @@ import React from "react";
  */
 function JobCard({ job }) {
   return (
-    <div className="JobCard col card my-2">
+    <div className="JobCard col card my-2 p-3">
       <h4>{job.title}</h4>
       {job.salary ? <p>{`Salary: ${job.salary}`}</p> : ""}
       {job.equity ? <p>{`Equity: ${job.equity}`}</p> : ""}

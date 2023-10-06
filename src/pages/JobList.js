@@ -34,7 +34,7 @@ function JobList() {
   if (!jobs) return <h1>Jobs Loading....</h1>;
 
   return (
-    <div className="JobList container text-center">
+    <div className="JobList container d-flex flex-column align-items-center">
       <SearchForm filter={filter} />
       <div className="row row-cols-1">
         {jobs.length === 0 && <p>Sorry, no results were found!</p>}

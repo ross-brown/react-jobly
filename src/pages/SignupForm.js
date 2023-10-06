@@ -43,7 +43,7 @@ function SignupForm({ signup }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     setFormErrors([]);
-    
+
     try {
       await signup(formData);
       navigate("/");
@@ -54,10 +54,11 @@ function SignupForm({ signup }) {
   }
 
   return (
-    <div className="SignupForm m-5">
-      <form onSubmit={handleSubmit} className="form-control mb-4">
-        <div className="mb-3">
-          <label htmlFor="username">Username</label>
+    <div className="SignupForm col-md-4 m-5">
+      <h1>Join Jobly Today</h1>
+      <form onSubmit={handleSubmit} className="form-control p-3 my-4">
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="username">Username</label>
           <input
             required
             id="username"
@@ -67,8 +68,8 @@ function SignupForm({ signup }) {
             className="form-control"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="password">Password</label>
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="password">Password</label>
           <input
             required
             type="password"
@@ -79,8 +80,8 @@ function SignupForm({ signup }) {
             className="form-control"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="first-name">First Name</label>
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="first-name">First Name</label>
           <input
             required
             id="first-name"
@@ -90,8 +91,8 @@ function SignupForm({ signup }) {
             className="form-control"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="last-name">Last Name</label>
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="last-name">Last Name</label>
           <input
             required
             id="last-name"
@@ -101,8 +102,8 @@ function SignupForm({ signup }) {
             className="form-control"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="email">Email</label>
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="email">Email</label>
           <input
             required
             id="email"
@@ -112,7 +113,7 @@ function SignupForm({ signup }) {
             className="form-control"
           />
         </div>
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-primary">Sign up</button>
       </form>
       {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"}/>}
     </div>

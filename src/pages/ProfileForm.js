@@ -46,21 +46,21 @@ function ProfileForm({ editProfile }) {
 
   return (
     <div className="SignupForm m-5">
-      <form onSubmit={handleSubmit} className="form-control mb-4">
-        <div className="mb-3">
-          <label htmlFor="username">Username</label>
+      <form onSubmit={handleSubmit} className="form-control p-3 mb-4">
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="username">Username</label>
           <input
             disabled={true}
             required
             id="username"
-            value={formData.username}
+            placeholder={formData.username}
             name="username"
             onChange={handleChange}
             className="form-control"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="first-name">First Name</label>
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="first-name">First Name</label>
           <input
             required
             id="first-name"
@@ -70,8 +70,8 @@ function ProfileForm({ editProfile }) {
             className="form-control"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="last-name">Last Name</label>
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="last-name">Last Name</label>
           <input
             required
             id="last-name"
@@ -81,8 +81,8 @@ function ProfileForm({ editProfile }) {
             className="form-control"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="email">Email</label>
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="email">Email</label>
           <input
             required
             id="email"

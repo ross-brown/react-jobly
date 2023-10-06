@@ -48,10 +48,11 @@ function LoginForm({ login }) {
   }
 
   return (
-    <div className="LoginForm m-5">
-      <form onSubmit={handleSubmit} className="form-control mb-4">
-        <div className="mb-3">
-          <label htmlFor="username">Username</label>
+    <div className="LoginForm col-md-4 m-5">
+      <h1>Sign in to Jobly</h1>
+      <form onSubmit={handleSubmit} className="form-control p-3 my-4">
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="username">Username</label>
           <input
             required
             id="username"
@@ -61,8 +62,8 @@ function LoginForm({ login }) {
             className="form-control"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="password">Password</label>
+        <div className="mb-3 text-start">
+          <label className="form-label" htmlFor="password">Password</label>
           <input
             required
             type="password"
@@ -73,7 +74,7 @@ function LoginForm({ login }) {
             className="form-control"
           />
         </div>
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-primary">Log in</button>
       </form>
       {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"} />}
     </div>

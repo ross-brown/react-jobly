@@ -23,15 +23,15 @@ function SearchForm({ filter }) {
   }
 
   return (
-    <div className="SearchForm mt-3">
-      <form onSubmit={handleSubmit}>
+    <div className="SearchForm mt-3 w-50">
+      <form className="d-flex" onSubmit={handleSubmit}>
         <input
-          className="form-control d-inline"
+          className="form-control mx-3"
           placeholder="Enter Search Term..."
           onChange={handleChange}
           value={searchTerm}
         />
-        <button className="btn btn-primary d-inline mt-2">Submit</button>
+        <button className="btn btn-primary mt-2">Submit</button>
       </form>
     </div>
   );

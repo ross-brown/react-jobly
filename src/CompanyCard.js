@@ -1,4 +1,5 @@
 import React from "react";
+import "./CompanyCard.css"
 
 
 /** CompanyCard: simple presentation component for info on a company
@@ -13,7 +14,7 @@ function CompanyCard({ company }) {
     <div className="CompanyCard col card my-2 p-2">
       {company.logoUrl &&
         <img src={company.logoUrl} alt={company.handle} width="75px" />}
-      <h2>{company.name}</h2>
+      <h4>{company.name}</h4>
       <p>{company.description}</p>
     </div>
   );

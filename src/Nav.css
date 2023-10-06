@@ -7,6 +7,5 @@
 }
 
 .Nav a.active {
-  text-decoration: underline;
   font-weight: bolder;
 }
