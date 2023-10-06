@@ -34,7 +34,7 @@ function CompanyList() {
   if (!companies) return <h1>Companies Loading....</h1>;
 
   return (
-    <div className="CompanyList container text-center">
+    <div className="CompanyList container">
       <SearchForm filter={filter} />
       <div className="row row-cols-1 d-flex justify-content-center">
         {companies.length === 0 && <p>Sorry, no results were found!</p>}
