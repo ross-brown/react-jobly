@@ -23,14 +23,15 @@ function SearchForm({ filter }) {
   }
 
   return (
-    <div className="SearchForm">
+    <div className="SearchForm mt-3">
       <form onSubmit={handleSubmit}>
         <input
+          className="form-control d-inline"
           placeholder="Enter Search Term..."
           onChange={handleChange}
           value={searchTerm}
         />
-        <button>Submit</button>
+        <button className="btn btn-primary d-inline mt-2">Submit</button>
       </form>
     </div>
   );

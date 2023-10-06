@@ -25,7 +25,7 @@ function RoutesList({ login, signup, editProfile }) {
   const { currentUser } = useContext(userContext);
 
   return (
-    <div className="RoutesList">
+    <div className="RoutesList container">
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="*" element={<NotFound />} />

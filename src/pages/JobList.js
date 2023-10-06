@@ -34,10 +34,12 @@ function JobList() {
   if (!jobs) return <h1>Jobs Loading....</h1>;
 
   return (
-    <div className="JobList">
+    <div className="JobList container text-center">
       <SearchForm filter={filter} />
-      {jobs.length === 0 && <p>Sorry, no results were found!</p>}
-      <JobCardList jobs={jobs} />
+      <div className="row row-cols-1">
+        {jobs.length === 0 && <p>Sorry, no results were found!</p>}
+        <JobCardList jobs={jobs} />
+      </div>
     </div>
 
   );

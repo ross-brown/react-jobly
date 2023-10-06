@@ -34,13 +34,15 @@ function CompanyList() {
   if (!companies) return <h1>Companies Loading....</h1>;
 
   return (
-    <div className="CompanyList">
+    <div className="CompanyList container text-center">
       <SearchForm filter={filter} />
-      {companies.length === 0 && <p>Sorry, no results were found!</p>}
-      {companies.map(c => (
-        <Link to={`${c.handle}`} key={c.handle}>
-          <CompanyCard key={c.handle} company={c} />
-        </Link>))}
+      <div className="row row-cols-1 d-flex justify-content-center">
+        {companies.length === 0 && <p>Sorry, no results were found!</p>}
+        {companies.map(c => (
+          <Link to={`${c.handle}`} key={c.handle}>
+            <CompanyCard key={c.handle} company={c} />
+          </Link>))}
+      </div>
     </div>
   );
 }
