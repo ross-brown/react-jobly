@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./CompanyList.css"
+import "./CompanyList.css";
 
 import SearchForm from "../SearchForm";
 import CompanyCard from "../CompanyCard";
@@ -37,10 +37,13 @@ function CompanyList() {
   return (
     <div className="CompanyList container d-flex flex-column align-items-center">
       <SearchForm filter={filter} />
-      <div className="row row-cols-1 d-flex justify-content-center">
+
+      <div className="row row-cols-1">
         {companies.length === 0 && <p>Sorry, no results were found!</p>}
         {companies.map(c => (
-          <Link to={`${c.handle}`} key={c.handle}>
+          <Link
+            to={`${c.handle}`}
+            key={c.handle}>
             <CompanyCard key={c.handle} company={c} />
           </Link>))}
       </div>
