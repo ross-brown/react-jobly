@@ -14,7 +14,6 @@ function ProfileForm({ editProfile }) {
     email
   });
 
-  console.log("formData in Edit form",formData);
   const [formErrors, setFormErrors] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
 
@@ -34,6 +33,7 @@ function ProfileForm({ editProfile }) {
    */
   async function handleSubmit(evt) {
     evt.preventDefault();
+    setFormErrors([]);
 
     try {
       await editProfile(formData);

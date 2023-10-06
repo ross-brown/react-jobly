@@ -42,7 +42,8 @@ function SignupForm({ signup }) {
    */
   async function handleSubmit(evt) {
     evt.preventDefault();
-
+    setFormErrors([]);
+    
     try {
       await signup(formData);
       navigate("/");

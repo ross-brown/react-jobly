@@ -36,6 +36,7 @@ function LoginForm({ login }) {
    */
   async function handleSubmit(evt) {
     evt.preventDefault();
+    setFormErrors([]);
 
     try {
       await login(formData);

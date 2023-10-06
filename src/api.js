@@ -108,6 +108,7 @@ class JoblyApi {
     return res.user;
   }
 
+  /** Patch a user's info, return the new user info. */
   static async editUser(username, editFormData) {
     let res = await this.request(`users/${username}`, editFormData, "PATCH");
 
