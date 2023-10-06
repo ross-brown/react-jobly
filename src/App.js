@@ -34,6 +34,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ data: null, isLoaded: false });
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [appIds, setAppIds] = useState(new Set());
+  console.log("appIds", appIds);
 
   // console.log(currentUser.data);
   useEffect(() => {
@@ -51,6 +52,7 @@ function App() {
     token
       ? fetchCurrentUser()
       : setCurrentUser(c => ({ ...c, isLoaded: true }));
+
   }, [token]);
 
   useEffect(() => {
@@ -88,15 +90,16 @@ function App() {
     setCurrentUser(u => ({ ...u, data: user }));
   }
 
+  /** adds username and job id to application database and sets job id to state id. */
   async function apply(username, jobId) {
     const id = await JoblyApi.applyToJob(username, jobId);
-    setAppIds(ids => new Set([...ids, id]))
+    setAppIds(ids => new Set([...ids, id]));
   }
 
-  // async function unapply(username, jobId) {
-  //   const id = await JoblyApi.unapplyToJob(username, jobId);
-  //   setCurrentUser()
-  // }
+  async function unapply(username, jobId) {
+    const id = await JoblyApi.unapplyToJob(username, jobId);
+    setAppIds(new Set(currentUser.data.applications.filter(id => id !== jobId)));
+  }
 
   /** Protects whole app */
   if (!currentUser.isLoaded) return <h1>Jobly Loading...</h1>;
@@ -104,13 +107,13 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <userContext.Provider value={{ currentUser, appIds }}>
+        <userContext.Provider value={{ currentUser, appIds, apply, unapply, appIds }}>
           <Nav logout={logout} />
           <RoutesList
             login={login}
             signup={signup}
             editProfile={editProfile}
-            apply={apply} />
+          />
         </userContext.Provider>
       </BrowserRouter>
     </div>
