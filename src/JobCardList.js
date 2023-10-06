@@ -9,11 +9,11 @@ import JobCard from "./JobCard";
  * { CompanyDetail, JobList } -> JobCardList
  */
 
-function JobCardList({ jobs }) {
+function JobCardList({ jobs, apply }) {
   return (
     <>
       {jobs.map(j => (
-        <JobCard job={j} key={j.id} />
+        <JobCard job={j} key={j.id} apply={apply} />
       ))}
     </>
   );

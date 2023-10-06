@@ -25,6 +25,7 @@ import JoblyApi from './api';
  * - login
  * - logout
  * - editProfile
+ * - apply
  *
  * App -> { Nav, RoutesList }
  */
@@ -33,6 +34,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ data: null, isLoaded: false });
   const [token, setToken] = useState(localStorage.getItem("token"));
 
+  // console.log(currentUser.data);
   useEffect(() => {
     async function fetchCurrentUser() {
       const { username } = jwtDecode(token);
@@ -85,8 +87,12 @@ function App() {
     setCurrentUser(u => ({ ...u, data: user }));
   }
 
-  async function applyToJob(jobId) {
-
+  async function apply(username, jobId) {
+    const id = await JoblyApi.applyToJob(username, jobId);
+    setCurrentUser(c => ({
+      data: { ...c.data, applications: [...c.data.applications, id] },
+      isLoaded: true
+    }));
   }
 
   /** Protects whole app */
@@ -100,7 +106,8 @@ function App() {
           <RoutesList
             login={login}
             signup={signup}
-            editProfile={editProfile} />
+            editProfile={editProfile}
+            apply={apply} />
         </userContext.Provider>
       </BrowserRouter>
     </div>

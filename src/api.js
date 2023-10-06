@@ -84,6 +84,17 @@ class JoblyApi {
     return res.jobs;
   }
 
+  /** Get detials on a job by id.
+   *
+   * Returns { id, title, salary, equity, company }
+   * where company is { handle, name, description, numEmployees, logoUrl }
+   */
+  static async getJob(id) {
+    let res = await this.request(`jobs/${id}`);
+
+    return res.job;
+  }
+
   /** login: takes in a username and password and returns a JWT */
   static async login(userCreds) {
     let res = await this.request("auth/token", userCreds, "POST");
@@ -104,7 +115,7 @@ class JoblyApi {
   /** Get info on a user by username */
   static async getUser(username) {
     let res = await this.request(`users/${username}`);
-
+    console.log("res.user", res.user);
     return res.user;
   }
 
@@ -113,6 +124,13 @@ class JoblyApi {
     let res = await this.request(`users/${username}`, editFormData, "PATCH");
 
     return res.user;
+  }
+
+  /** Applies to a job given a username and job ID. Returns the Job ID */
+  static async applyToJob(username, jobId) {
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "POST");
+
+    return res.applied;
   }
 }
 

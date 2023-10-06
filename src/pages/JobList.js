@@ -13,7 +13,7 @@ import JobCardList from "../JobCardList";
  * RoutesList -> JobList
  */
 
-function JobList() {
+function JobList({ apply }) {
   const [jobs, setJobs] = useState(null);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function JobList() {
       <SearchForm filter={filter} />
       <div className="row row-cols-1">
         {jobs.length === 0 && <p>Sorry, no results were found!</p>}
-        <JobCardList jobs={jobs} />
+        <JobCardList jobs={jobs} apply={apply} />
       </div>
     </div>
 
