@@ -44,6 +44,7 @@ function App() {
         setCurrentUser({ data: user, isLoaded: true });
         setAppIds(new Set([...user.applications]));
       } catch (error) {
+        setCurrentUser({ data: null, isLoaded: true });
         console.error(error);
       }
     }
