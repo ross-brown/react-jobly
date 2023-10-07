@@ -7,6 +7,7 @@ import Nav from './Nav';
 import RoutesList from './RoutesList';
 import userContext from './userContext';
 import JoblyApi from './api';
+import Loading from './pages/Loading';
 
 /** Renders Jobly App components.
  *
@@ -94,17 +95,20 @@ function App() {
     setAppIds(ids => new Set([...ids, id]));
   }
 
+
+  /** sends API call to unapply to job with username/job ID. Updates app IDs state */
   async function unapply(username, jobId) {
     await JoblyApi.unapplyToJob(username, jobId);
     setAppIds(a => new Set([...a].filter(id => id !== jobId)));
   }
 
+  /** checks if a job id is the in app ids state */
   function hasAppliedToJob(id) {
     return appIds.has(id);
   }
 
   /** Protects whole app */
-  if (!currentUser.isLoaded) return <h1>Jobly Loading...</h1>;
+  if (!currentUser.isLoaded) return <Loading />;
 
   return (
     <div className="App">
