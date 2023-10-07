@@ -28,7 +28,7 @@ function Profile({ editProfile }) {
 
       <div className="row row-cols-1">
         <h3>Jobs Applied:</h3>
-        {jobs.length === 0 && <p>Sorry, no job applications found.</p>}
+        {jobs.length === 0 && <p>No job applications found.</p>}
         <JobCardList jobs={jobs} />
       </div>
 

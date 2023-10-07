@@ -34,10 +34,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ data: null, isLoaded: false });
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [appIds, setAppIds] = useState(new Set([]));
-  console.log("appIds in App", appIds);
-  // console.log("currentUser apps", currentUser.data.applications);
 
-  console.log("currentUser data in APp", currentUser.data);
   useEffect(() => {
     async function fetchCurrentUser() {
       const { username } = jwtDecode(token);
@@ -92,16 +89,12 @@ function App() {
 
   /** adds username and job id to application database and sets job id to state id. */
   async function apply(username, jobId) {
-    console.log("apply username =", username, "jobId=", jobId);
     const id = await JoblyApi.applyToJob(username, jobId);
     setAppIds(ids => new Set([...ids, id]));
   }
 
   async function unapply(username, jobId) {
-    console.log("unapply username =", username, "jobId=", jobId);
-
     await JoblyApi.unapplyToJob(username, jobId);
-
     setAppIds(a => new Set([...a].filter(id => id !== jobId)));
   }
 
