@@ -57,10 +57,10 @@ function JobCard({ job }) {
         <h4>{job.title}</h4>
         <h5>{job.companyName}</h5>
         <div>
-          {job.salary ? <small>{`Salary: ${job.salary}`}</small> : ""}
+          {job.salary ? <small>{`Salary: $${Intl.NumberFormat("en-US").format(job.salary)}`}</small> : ""}
         </div>
         <div>
-          {job.equity ? <small>{`Equity: ${job.equity}`}</small> : ""}
+          {job.equity ? <small>{`Equity: ${job.equity}%`}</small> : ""}
         </div>
         <button
           value={job.id}

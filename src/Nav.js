@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import userContext from "./userContext";
 import "./Nav.css";
+import { MdOutlineWorkOutline } from "react-icons/md";
 
 /** Renders Navbar.
  *
@@ -16,7 +17,9 @@ function Nav({ logout }) {
 
   return (
     <nav className="Nav navbar border-bottom px-4 mb-4">
-      <Link className="navbar-brand" to="/">Jobly</Link>
+      <Link className="navbar-brand" to="/">
+        Jobly <MdOutlineWorkOutline />
+      </Link>
       {currentUser.data
         ? <div className="d-inline justify-content-end">
           <NavLink className="mx-4" to="/companies">Companies</NavLink>
