@@ -74,7 +74,7 @@ function LoginForm({ login }) {
             className="form-control"
           />
         </div>
-        <button className="btn btn-primary">Log in</button>
+        <button className="btn btn-outline-success">Log in</button>
       </form>
       {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"} />}
     </div>

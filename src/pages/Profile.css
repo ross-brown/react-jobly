@@ -1,3 +1,8 @@
 .Profile {
   width: 35rem;
 }
+
+.Profile h3 {
+  color: whitesmoke;
+  text-shadow: 2px 2px 2px #333131
+}

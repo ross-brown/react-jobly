@@ -25,7 +25,7 @@ function RoutesList({ login, signup, editProfile }) {
   const { currentUser } = useContext(userContext);
 
   return (
-    <div className="RoutesList container d-flex flex-column align-items-center">
+    <div className="RoutesList container d-flex flex-column align-items-center mt-4">
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="*" element={<NotFound />} />

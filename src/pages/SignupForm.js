@@ -113,7 +113,7 @@ function SignupForm({ signup }) {
             className="form-control"
           />
         </div>
-        <button className="btn btn-primary">Sign up</button>
+        <button className="btn btn-outline-success">Sign up</button>
       </form>
       {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"}/>}
     </div>

@@ -92,7 +92,7 @@ function ProfileForm({ editProfile }) {
             className="form-control"
           />
         </div>
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-primary">Edit Profile</button>
       </form>
       {isSaved && <Alert type={"success"} errors={"Changes saved."} />}
       {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"} />}

@@ -16,7 +16,7 @@ function Nav({ logout }) {
   const { currentUser } = useContext(userContext);
 
   return (
-    <nav className="Nav navbar border-bottom px-4 mb-4">
+    <nav className="Nav navbar border-bottom px-4">
       <Link className="navbar-brand" to="/">
         Jobly <MdOutlineWorkOutline />
       </Link>

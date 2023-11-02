@@ -1,7 +1,5 @@
 .App {
   text-align: center;
-  /* display: flex;
-  flex-direction: column; */
   height: 100vh;
 }
 
@@ -29,6 +27,14 @@
 
 .App-link {
   color: #61dafb;
+}
+
+
+.NotFound .Homepage {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @keyframes App-logo-spin {
