@@ -1,4 +1,5 @@
 import React from "react";
+import { formatError } from "./utils";
 
 
 /** Alert: simple presentaional component that renders error messages
@@ -11,14 +12,14 @@ import React from "react";
 function Alert({ errors, type }) {
   console.log("errors prop in Alert", errors);
   return (
-    <div className={`alert alert-${type} pb-0`}>
-     { Array.isArray(errors)
-      ? errors.map((err, i) => {
+    <div className={`alert alert-${type} pb-0 fw-semibold`}>
+      {Array.isArray(errors)
+        ? errors.map((err, i) => {
           return (
-            <p key={i}>{err}</p>
+            <p key={i}>{formatError(err)}</p>
           );
         })
-      : <p>{errors}</p>}
+        : <p>{errors}</p>}
     </div>
   );
 }

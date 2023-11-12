@@ -17,6 +17,7 @@ import React, { useState } from "react";
 function LoginForm({ login }) {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [formErrors, setFormErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -37,11 +38,14 @@ function LoginForm({ login }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     setFormErrors([]);
+    setIsLoading(true);
 
     try {
       await login(formData);
+      setIsLoading(false);
       navigate("/");
     } catch (err) {
+      setIsLoading(false);
       let errors = err[0].message;
       setFormErrors(errors);
     }
@@ -75,6 +79,13 @@ function LoginForm({ login }) {
           />
         </div>
         <button className="btn btn-outline-success">Log in</button>
+        {isLoading &&
+          <div className="mt-4">
+            <div className="spinner-border text-dark" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        }
       </form>
       {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"} />}
     </div>

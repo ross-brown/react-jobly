@@ -16,6 +16,7 @@ function ProfileForm({ editProfile }) {
 
   const [formErrors, setFormErrors] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   /** Update formData inputs */
   function handleChange(evt) {
@@ -34,11 +35,15 @@ function ProfileForm({ editProfile }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     setFormErrors([]);
+    setIsSaved(false);
+    setIsSaving(true);
 
     try {
       await editProfile(formData);
       setIsSaved(true);
+      setIsSaving(false);
     } catch (err) {
+      setIsSaving(false);
       let errors = err[0].message;
       setFormErrors(errors);
     }
@@ -93,6 +98,13 @@ function ProfileForm({ editProfile }) {
           />
         </div>
         <button className="btn btn-primary">Edit Profile</button>
+        {isSaving &&
+          <div className="mt-4">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        }
       </form>
       {isSaved && <Alert type={"success"} errors={"Changes saved."} />}
       {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"} />}

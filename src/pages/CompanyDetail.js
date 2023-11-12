@@ -27,8 +27,10 @@ function CompanyDetail() {
 
   return (
     <div className="CompanyDetail container d-flex flex-column align-items-center">
-      <h3>{company.name}</h3>
-      <p>{company.description}</p>
+      <div className="bg-light-subtle px-4 py-2 rounded">
+        <h3>{company.name}</h3>
+        <p>{company.description}</p>
+      </div>
       <div className="row row-cols-1">
         <JobCardList jobs={company.jobs} />
       </div>

@@ -23,6 +23,7 @@ function SignupForm({ signup }) {
     email: ""
   });
   const [formErrors, setFormErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -43,11 +44,14 @@ function SignupForm({ signup }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     setFormErrors([]);
+    setIsLoading(true);
 
     try {
       await signup(formData);
+      setIsLoading(false);
       navigate("/");
     } catch (err) {
+      setIsLoading(false);
       let errors = err[0].message;
       setFormErrors(errors);
     }
@@ -114,8 +118,15 @@ function SignupForm({ signup }) {
           />
         </div>
         <button className="btn btn-outline-success">Sign up</button>
+        {isLoading &&
+          <div className="mt-4">
+            <div className="spinner-border text-dark" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        }
       </form>
-      {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"}/>}
+      {formErrors.length !== 0 && <Alert errors={formErrors} type={"danger"} />}
     </div>
   );
 }
