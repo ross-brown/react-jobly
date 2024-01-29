@@ -77,10 +77,12 @@ class JoblyApi {
    * Send query string if filtering term is passed in.
    */
 
-  static async getJobs(searchTerm) {
+  static async getJobs(searchTerm, minSalary, hasEquity) {
     let data = searchTerm ? { title: searchTerm } : {};
-    let res = await this.request("jobs", data);
+    data = minSalary ? { ...data, minSalary } : data;
+    data = hasEquity ? { ...data, hasEquity } : data;
 
+    let res = await this.request("jobs", data);
     return res.jobs;
   }
 
@@ -115,7 +117,7 @@ class JoblyApi {
   /** Get info on a user by username */
   static async getUser(username) {
     let res = await this.request(`users/${username}`);
-  
+
     return res.user;
   }
 

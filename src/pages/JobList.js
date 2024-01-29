@@ -13,7 +13,7 @@ import JobCardList from "../JobCardList";
  * RoutesList -> JobList
  */
 
-function JobList({ apply }) {
+function JobList() {
   const [jobs, setJobs] = useState(null);
 
   useEffect(() => {
@@ -24,10 +24,10 @@ function JobList({ apply }) {
     fetchJobs();
   }, []);
 
-  /** filter: takes in a search term and
-   * returns a list of jobs that match that title */
-  async function filter(searchTerm) {
-    const data = await JoblyApi.getJobs(searchTerm);
+  /** filter: takes in a search term and min salary.
+   * returns a list of jobs that match that filter */
+  async function filter(searchTerm, minSalary, hasEquity) {
+    const data = await JoblyApi.getJobs(searchTerm, minSalary, hasEquity);
     setJobs(data);
   }
 

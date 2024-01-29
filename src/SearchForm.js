@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 /** Renders search form for both companies and jobs.
  *
@@ -9,29 +10,74 @@ import React, { useState } from "react";
  */
 
 function SearchForm({ filter }) {
-  const [searchTerm, setSearchTerm] = useState("");
+  const { pathname } = useLocation();
 
-  /** Updates search input value */
+  const [searchTerm, setSearchTerm] = useState("");
+  const [minSalary, setMinSalary] = useState("");
+  const [hasEquity, setHasEquity] = useState(false);
+
   function handleChange(evt) {
     setSearchTerm(evt.target.value);
   }
 
-  /** call parent filter function with current search term value. */
+  function handleSalaryChange(evt) {
+    setMinSalary(evt.target.value);
+  }
+
+  function handleEquityChange(evt) {
+    setHasEquity(evt.target.checked);
+  }
+
   function handleSubmit(evt) {
     evt.preventDefault();
-    filter(searchTerm);
+    filter(searchTerm, minSalary, hasEquity);
   }
 
   return (
-    <div className="SearchForm mt-3 w-50">
-      <form className="d-flex" onSubmit={handleSubmit}>
+    <div className="my-3 w-50">
+      <form
+        className="d-flex flex-column align-items-start gap-2"
+        onSubmit={handleSubmit}
+      >
         <input
-          className="form-control mx-3"
+          className="form-control"
           placeholder="Enter Search Term..."
           onChange={handleChange}
           value={searchTerm}
         />
-        <button className="btn btn-primary mt-2">Submit</button>
+        {pathname === '/jobs' &&
+          <>
+            <select
+              className="form-select"
+              aria-label="Minimum salary select"
+              onChange={handleSalaryChange}
+              value={minSalary}
+            >
+              <option value="">Minimum Salary</option>
+              <option value="60000">$60,000</option>
+              <option value="80000">$80,000</option>
+              <option value="100000">$100,000</option>
+              <option value="120000">$120,000</option>
+              <option value="140000">$140,000</option>
+              <option value="160000">$160,000</option>
+              <option value="180000">$180,000</option>
+              <option value="200000">$200,000</option>
+            </select>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                checked={hasEquity}
+                id="flexCheckDefault"
+                onChange={handleEquityChange}
+              />
+              <label className="form-check-label" htmlFor="flexCheckDefault">
+                Equity Included
+              </label>
+            </div>
+          </>
+        }
+        <button className="btn btn-primary">Search</button>
       </form>
     </div>
   );
