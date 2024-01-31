@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./JobCard.css";
+import { toast } from "sonner";
 
 import userContext from "./userContext";
 
@@ -31,6 +32,7 @@ function JobCard({ job }) {
     try {
       await apply(currentUser.data.username, jobId);
       setHasApplied(true);
+      toast.success(`Application for ${job.title} submitted!`);
     } catch (error) {
       console.error("Error applying to job", error);
     }
@@ -46,6 +48,7 @@ function JobCard({ job }) {
     try {
       await unapply(currentUser.data.username, jobId);
       setHasApplied(false);
+      toast.info(`Application for ${job.title} withdrawn`);
     } catch (error) {
       console.error("Error unapplying to job", error);
     }

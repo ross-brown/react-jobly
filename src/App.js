@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
+import { Toaster } from 'sonner';
 
 import Nav from './Nav';
 import RoutesList from './RoutesList';
@@ -115,6 +116,11 @@ function App() {
       <BrowserRouter>
         <userContext.Provider value={{ currentUser, hasAppliedToJob, apply, unapply }}>
           <Nav logout={logout} />
+          <Toaster
+            richColors
+            position='top-right'
+            closeButton
+          />
           <RoutesList
             login={login}
             signup={signup}

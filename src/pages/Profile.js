@@ -5,6 +5,7 @@ import ProfileForm from "./ProfileForm";
 import userContext from "../userContext";
 import JoblyApi from "../api";
 import JobCardList from "../JobCardList";
+import { Link } from "react-router-dom";
 
 function Profile({ editProfile }) {
   const [jobs, setJobs] = useState(null);
@@ -26,10 +27,19 @@ function Profile({ editProfile }) {
       <h1>Profile</h1>
       <ProfileForm editProfile={editProfile} />
 
+      <h3>Jobs Applied:</h3>
       <div className="row row-cols-1">
-        <h3>Jobs Applied:</h3>
-        {jobs.length === 0 && <p>No job applications found.</p>}
-        <JobCardList jobs={jobs} />
+        {jobs.length === 0
+          ? (<div>
+            <p className="fw-bold">
+              No applications found.
+            </p>
+            <p className="fw-bold">
+              Click on <Link to={"/jobs"}>here</Link> to start your search!
+            </p>
+          </div>)
+          : <JobCardList jobs={jobs} />
+        }
       </div>
 
     </div>
