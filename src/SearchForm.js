@@ -15,6 +15,7 @@ function SearchForm({ filter }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [minSalary, setMinSalary] = useState("");
   const [hasEquity, setHasEquity] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(evt) {
     setSearchTerm(evt.target.value);
@@ -28,9 +29,11 @@ function SearchForm({ filter }) {
     setHasEquity(evt.target.checked);
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    filter(searchTerm, minSalary, hasEquity);
+    setIsLoading(true);
+    await filter(searchTerm, minSalary, hasEquity);
+    setIsLoading(false);
   }
 
   return (
@@ -77,7 +80,16 @@ function SearchForm({ filter }) {
             </div>
           </>
         }
-        <button className="btn btn-primary">Search</button>
+        <div className="d-flex align-items-center">
+          <button className="btn btn-primary">Search</button>
+          {isLoading &&
+            <div className="mx-3">
+              <div className="spinner-border text-dark" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          }
+        </div>
       </form>
     </div>
   );
