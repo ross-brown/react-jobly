@@ -16,8 +16,12 @@ function CompanyCard({ company }) {
         <img
           className="company-logo"
           src={company.logoUrl}
-          alt={company.handle} width="75px" />}
+          alt={company.handle}
+          width="75px"
+        />
+      }
       <h4>{company.name}</h4>
+      <i>{company.numEmployees} employees</i>
       <div className="card-body">
         <p>{company.description}</p>
       </div>
