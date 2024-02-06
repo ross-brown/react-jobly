@@ -78,6 +78,11 @@ function LoginForm({ login }) {
             className="form-control"
           />
         </div>
+        <div className="fst-italic">
+          <p className="fw-bold text-decoration-underline mb-1">Guest credentials: </p>
+          <p className="mb-1">Username: testuser</p>
+          <p>Password: password</p>
+        </div>
         <button className="btn btn-outline-success">Log in</button>
         {isLoading &&
           <div className="mt-4">
